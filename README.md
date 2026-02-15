@@ -1,5 +1,4 @@
 Bu sayfa belli teknikler kullanılarak şifrelenmiş metinleri çözmeye yarayan encoding uygulamasıdır.
-file:///Users/yarencanli/Desktop/KriptoY/index.html#c
 
 Kullanılan Teknolojiler:
 <br/>
