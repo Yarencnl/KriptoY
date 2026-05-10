@@ -1,28 +1,55 @@
 <!DOCTYPE html>
 <html lang="tr">
-    <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="style.css">
-        <title>KriptoY</title>
-    </head>
-    <body> 
-        <img src="images/01.jpg" alt="KriptoY Logo" height="150px" width="1500px">
-        <h1>KriptoY🌙</h1>
-        <header>
-            <marquee behavior="alternate" direction="left">Bu sayfa belli teknikler kullanılarak şifrelenmiş metinleri çözmeye yarayan encoding uygulamasıdır.</marquee>
-        </header>
-        <button>
-            ASCII 
-        </button>
-        <button>
-            Base64 
-        </button>
-        <button>
-            Base32
-        </button>
-        <button>
-            Binary
-        </button>
-    </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KriptoY — Encoding Decoder</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-</html> 
+  <canvas id="matrix-canvas"></canvas>
+
+  <div class="header">
+    <div class="logo">KriptoY<span class="moon">🌙</span><span class="cursor"></span></div>
+    <p class="tagline">Encoding &amp; Decoding Aracı</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="setMode('ascii', this)">ASCII</button>
+    <button class="tab" onclick="setMode('base64', this)">Base64</button>
+    <button class="tab" onclick="setMode('base32', this)">Base32</button>
+    <button class="tab" onclick="setMode('binary', this)">Binary</button>
+  </div>
+
+  <div class="card">
+    <div class="mode-label" id="mode-label">ASCII — Metin ↔ Kod</div>
+
+    <textarea id="input" placeholder="Metni buraya gir..."></textarea>
+
+    <div class="actions">
+      <button class="btn" onclick="encode()">ENCODE →</button>
+      <button class="btn" onclick="decode()">← DECODE</button>
+      <button class="btn secondary" onclick="clearAll()">TEMİZLE</button>
+    </div>
+
+    <div class="output-wrap">
+      <div class="output-label">
+        <span></span>
+        <button class="copy-btn" onclick="copyOutput()">[ KOPYALA ]</button>
+      </div>
+      <div class="output-box" id="output">Sonuç burada görünecek...</div>
+    </div>
+
+    <div class="info-row">
+      <span id="char-count">0 karakter</span>
+      <span id="mode-info">Mod: ASCII</span>
+    </div>
+  </div>
+
+  <footer>KriptoY v2.0 &nbsp;|&nbsp; ASCII · Base64 · Base32 · Binary</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

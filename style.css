@@ -1,29 +1,311 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --green:      #00ff41;
+  --green-dim:  #00c030;
+  --green-dark: #003a0e;
+  --bg:         #000000;
+  --surface:    rgba(0, 255, 65, 0.04);
+  --border:     rgba(0, 255, 65, 0.2);
+  --mono:       'Share Tech Mono', monospace;
+  --display:    'Orbitron', monospace;
+}
+
+#matrix-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  opacity: 0.18;
+}
+
 body {
-  background-color: black;
-  text-align: center;
+  background: var(--bg);
+  color: var(--green);
+  font-family: var(--mono);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  position: relative;
+  z-index: 1;
 }
 
-h1 {
-  color: white;
+.header {
   text-align: center;
-  font-style: italic;
-  font-size: 50px;
+  margin-bottom: 3rem;
+  animation: fadeDown .8s ease both;
+}
 
+.logo {
+  font-family: var(--display);
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 900;
+  letter-spacing: .12em;
+  color: var(--green);
+  text-shadow:
+    0 0 10px var(--green),
+    0 0 40px rgba(0,255,65,.4),
+    0 0 80px rgba(0,255,65,.15);
+  display: inline-block;
 }
-marquee {
-  color: white;
-  font-size: 23px;
-  text-align: center;
+
+.logo .moon {
+  font-style: normal;
+  filter: drop-shadow(0 0 8px #ffdd44);
 }
-button {
-  background-color: gray;
-  color: black;
-  font-size: 20px;
-  padding: 10px 20px;
-  border: none;
+
+.tagline {
+  font-size: .85rem;
+  color: var(--green-dim);
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  margin-top: .5rem;
+  opacity: .75;
+}
+
+.tabs {
+  display: flex;
+  gap: .5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeUp .8s .2s ease both;
+}
+
+.tab {
+  font-family: var(--display);
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .15em;
+  padding: .6rem 1.4rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--green-dim);
   cursor: pointer;
+  transition: all .2s;
+  position: relative;
+  overflow: hidden;
 }
-button:hover {
-  background-color: white;
-  color: black;
+
+.tab::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--green);
+  transform: translateY(100%);
+  transition: transform .2s;
+  z-index: -1;
+}
+
+.tab:hover {
+  color: var(--bg);
+  border-color: var(--green);
+}
+
+.tab:hover::before {
+  transform: translateY(0);
+}
+
+.tab.active {
+  background: var(--green);
+  color: var(--bg);
+  border-color: var(--green);
+  box-shadow: 0 0 20px rgba(0,255,65,.35);
+}
+
+.card {
+  width: 100%;
+  max-width: 680px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 2rem;
+  position: relative;
+  animation: fadeUp .8s .3s ease both;
+}
+
+.card::before,
+.card::after {
+  content: '';
+  position: absolute;
+  width: 16px; height: 16px;
+  border-color: var(--green);
+  border-style: solid;
+}
+
+.card::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+.card::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+
+.mode-label {
+  font-size: .7rem;
+  letter-spacing: .2em;
+  color: var(--green-dim);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.mode-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+
+textarea {
+  width: 100%;
+  background: rgba(0,255,65,.03);
+  border: 1px solid var(--border);
+  color: var(--green);
+  font-family: var(--mono);
+  font-size: .95rem;
+  padding: 1rem;
+  resize: vertical;
+  min-height: 110px;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+  line-height: 1.6;
+}
+
+textarea:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 12px rgba(0,255,65,.15);
+}
+
+textarea::placeholder {
+  color: rgba(0,255,65,.3);
+}
+
+.actions {
+  display: flex;
+  gap: .75rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-family: var(--display);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .15em;
+  padding: .7rem 1.6rem;
+  border: 1px solid var(--green);
+  background: var(--green);
+  color: var(--bg);
+  cursor: pointer;
+  transition: all .15s;
+  flex: 1;
+  min-width: 120px;
+}
+
+.btn:hover {
+  background: transparent;
+  color: var(--green);
+  box-shadow: 0 0 16px rgba(0,255,65,.3);
+}
+
+.btn.secondary {
+  background: transparent;
+  color: var(--green-dim);
+  border-color: var(--border);
+}
+
+.btn.secondary:hover {
+  border-color: var(--green);
+  color: var(--green);
+  background: transparent;
+}
+
+.output-wrap { margin-top: 1.5rem; }
+
+.output-label {
+  font-size: .7rem;
+  letter-spacing: .2em;
+  color: var(--green-dim);
+  margin-bottom: .5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.copy-btn {
+  background: none;
+  border: none;
+  color: var(--green-dim);
+  font-family: var(--mono);
+  font-size: .7rem;
+  cursor: pointer;
+  letter-spacing: .1em;
+  transition: color .15s;
+}
+
+.copy-btn:hover { color: var(--green); }
+
+.output-box {
+  background: rgba(0,255,65,.05);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--green);
+  padding: 1rem;
+  font-size: .92rem;
+  line-height: 1.7;
+  min-height: 60px;
+  word-break: break-all;
+  white-space: pre-wrap;
+  transition: all .3s;
+}
+
+.output-box.error   { border-left-color: #ff4455; color: #ff6677; }
+.output-box.success { border-left-color: var(--green); color: var(--green); }
+
+.info-row {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  font-size: .72rem;
+  color: var(--green-dim);
+  opacity: .7;
+  flex-wrap: wrap;
+}
+
+footer {
+  margin-top: 3rem;
+  font-size: .72rem;
+  color: rgba(0,255,65,.3);
+  letter-spacing: .15em;
+  text-align: center;
+  animation: fadeUp .8s .5s ease both;
+}
+
+.cursor {
+  display: inline-block;
+  width: 3px;
+  height: .8em;
+  background: var(--green);
+  margin-left: 4px;
+  vertical-align: middle;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
 }
