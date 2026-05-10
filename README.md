@@ -1,10 +1,10 @@
 <img width="1000" height="500" alt="Ekran Resmi 2026-05-11 00 58 23" src="https://github.com/user-attachments/assets/91992d5c-b576-41f9-9c78-b2e333d9f654" />
 
-# KriptoY 🌙
+---
 
 A sleek, Matrix-inspired web tool for seamless data encoding and decoding. Designed with a futuristic cyberpunk aesthetic for security enthusiasts and developers.
 
-[🚀 View Live Demo](https://yarencanli.github.io/KriptoY/)
+[🚀 View Live Demo](https://Yarencnl.github.io/KriptoY/)
 
 ---
 
